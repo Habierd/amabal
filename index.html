@@ -10,15 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <!-- Header superior -->
   <header class="topbar">
     <div class="topbar__badge">Nuevo</div>
     <p class="topbar__text">Envíos gratis a partir de $100.000 COP en Colombia</p>
   </header>
 
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar__logo">
-      <span class="logo__icon">✿</span>
-      <span class="logo__text">amabal</span>
+      <a href="#/" class="logo-link">
+        <span class="logo__icon">✿</span>
+        <span class="logo__text">amabal</span>
+      </a>
     </div>
 
     <button class="navbar__toggle" aria-label="Abrir menú">
@@ -26,11 +30,11 @@
     </button>
 
     <div class="navbar__links">
-      <a href="#home">Inicio</a>
-      <a href="#products">Productos</a>
-      <a href="#categories">Categorías</a>
-      <a href="#about">Nosotras</a>
-      <a href="#contact">Contacto</a>
+      <a href="#/" class="nav-link">Inicio</a>
+      <a href="#/productos" class="nav-link">Productos</a>
+      <a href="#/categorias" class="nav-link">Categorías</a>
+      <a href="#/nosotras" class="nav-link">Nosotras</a>
+      <a href="#/contacto" class="nav-link">Contacto</a>
     </div>
 
     <div class="navbar__actions">
@@ -49,55 +53,45 @@
     </div>
   </nav>
 
-  <main id="home">
-    <section class="hero">
-      <div class="hero__content">
-        <p class="hero__pill">Tienda virtual • Belleza</p>
-        <h1>Amabal: belleza <span class="hero__highlight">cute</span> todos los días</h1>
-        <p class="hero__subtitle">
-          Uñas postizas, adhesivos, cuidado de manos, productos capilares, skincare y más.
-          Diseñado para chicas que aman los detalles.
-        </p>
-        <div class="hero__buttons">
-          <a href="#products" class="btn btn-primary">Ver productos</a>
-          <a href="#categories" class="btn btn-ghost">Explorar categorías</a>
+  <!-- Contenido principal (cambia según ruta) -->
+  <main id="app">
+    <!-- Sección: Inicio -->
+    <section class="page" id="home">
+      <div class="hero">
+        <div class="hero__content">
+          <p class="hero__pill">Tienda virtual • Belleza</p>
+          <h1>Amabal: belleza <span class="hero__highlight">cute</span> todos los días</h1>
+          <p class="hero__subtitle">
+            Uñas postizas, adhesivos, cuidado de manos, productos capilares, skincare y más.
+            Diseñado para chicas que aman los detalles.
+          </p>
+          <div class="hero__buttons">
+            <a href="#/productos" class="btn btn-primary">Ver productos</a>
+            <a href="#/categorias" class="btn btn-ghost">Explorar categorías</a>
+          </div>
+          <div class="hero__info">
+            <span>Pago seguro</span>
+            <span>Productos seleccionados</span>
+            <span>Envíos a todo Colombia</span>
+          </div>
         </div>
-        <div class="hero__info">
-          <span>Pago seguro</span>
-          <span>Productos seleccionados</span>
-          <span>Envíos a todo Colombia</span>
-        </div>
-      </div>
 
-      <div class="hero__card">
-        <p class="hero__card-title">Colección Uñas 2026</p>
-        <p class="hero__card-text">
-          Diseños delicados, tonos pastel y acabados glossy.
-        </p>
-        <ul class="hero__card-list">
-          <li>Uñas postizas listas para usar</li>
-          <li>Adhesivos resistentes y cómodos</li>
-          <li>Kits completos para principiantes</li>
-        </ul>
+        <div class="hero__card">
+          <p class="hero__card-title">Colección Uñas 2026</p>
+          <p class="hero__card-text">
+            Diseños delicados, tonos pastel y acabados glossy.
+          </p>
+          <ul class="hero__card-list">
+            <li>Uñas postizas listas para usar</li>
+            <li>Adhesivos resistentes y cómodos</li>
+            <li>Kits completos para principiantes</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="categories">
-      <header class="section__header">
-        <h2>Categorías destacadas</h2>
-        <p>Explora todo lo que tenemos para completar tu rutina de belleza.</p>
-      </header>
-
-      <div class="chip-list" id="categoryChips">
-        <button class="chip chip--active" data-category="all">Todo</button>
-        <button class="chip" data-category="unas">Uñas</button>
-        <button class="chip" data-category="capilar">Productos capilares</button>
-        <button class="chip" data-category="piel">Cuidado de la piel</button>
-        <button class="chip" data-category="accesorios">Accesorios</button>
-      </div>
-    </section>
-
-    <section class="section" id="products">
+    <!-- Sección: Productos -->
+    <section class="page" id="productos">
       <header class="section__header section__header--row">
         <div>
           <h2>Productos Amabal</h2>
@@ -111,16 +105,57 @@
         </select>
       </header>
 
-      <div class="products-grid" id="productGrid">
-        <!-- Se llena dinámicamente con script.js -->
+      <div class="chip-list" id="categoryChips">
+        <button class="chip chip--active" data-category="all">Todo</button>
+        <button class="chip" data-category="unas">Uñas</button>
+        <button class="chip" data-category="capilar">Productos capilares</button>
+        <button class="chip" data-category="piel">Cuidado de la piel</button>
+        <button class="chip" data-category="accesorios">Accesorios</button>
       </div>
+
+      <div class="products-grid" id="productGrid"></div>
 
       <p class="empty-state" id="emptyState" hidden>
         No encontramos productos con esos filtros. Prueba cambiando la búsqueda o categoría.
       </p>
     </section>
 
-    <section class="section section--soft" id="about">
+    <!-- Sección: Categorías -->
+    <section class="page section--soft" id="categorias">
+      <header class="section__header">
+        <h2>Categorías destacadas</h2>
+        <p>Explora todo lo que tenemos para completar tu rutina de belleza.</p>
+      </header>
+
+      <div class="categories-grid">
+        <article class="category-card">
+          <div class="category-card__icon">💅</div>
+          <h3>Uñas</h3>
+          <p>Uñas postizas, adhesivos, decoraciones y kits completos.</p>
+        </article>
+
+        <article class="category-card">
+          <div class="category-card__icon">💇‍♀️</div>
+          <h3>Productos capilares</h3>
+          <p>Serums, mascarillas y productos para tu cabello.</p>
+        </article>
+
+        <article class="category-card">
+          <div class="category-card__icon">🫧</div>
+          <h3>Cuidado de la piel</h3>
+          <p>Limpiadores, hidratantes y accesorios para skincare.</p>
+        </article>
+
+        <article class="category-card">
+          <div class="category-card__icon">🎀</div>
+          <h3>Accesorios</h3>
+          <p>Scrunchies, vinchas y detalles cute.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sección: Nosotras -->
+    <section class="page section--soft" id="nosotras">
       <div class="about">
         <div class="about__text">
           <h2>Sobre Amabal</h2>
@@ -150,7 +185,8 @@
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <!-- Sección: Contacto -->
+    <section class="page" id="contacto">
       <header class="section__header">
         <h2>Contacto y redes</h2>
         <p>Escríbenos para dudas, pedidos especiales o alianzas.</p>
@@ -189,14 +225,13 @@
     </section>
   </main>
 
+  <!-- Carrito lateral (mismo en todas las vistas) -->
   <aside class="cart-panel" id="cartPanel" aria-hidden="true">
     <div class="cart-panel__header">
       <h2>Tu carrito</h2>
       <button class="btn-icon" id="closeCartButton" aria-label="Cerrar carrito">✕</button>
     </div>
-    <div class="cart-panel__body" id="cartItems">
-      <!-- Items del carrito -->
-    </div>
+    <div class="cart-panel__body" id="cartItems"></div>
     <div class="cart-panel__footer">
       <div class="cart-panel__total">
         <span>Total:</span>

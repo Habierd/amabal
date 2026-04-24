@@ -1,4 +1,4 @@
-// Datos de ejemplo de productos
+// ===== DATOS DE PRODUCTOS (igual que antes) =====
 const products = [
   {
     id: 1,
@@ -97,10 +97,14 @@ let searchQuery = "";
 let sortMode = "default";
 let cart = [];
 
-// Helpers
+// ===== HELPERS =====
 const formatPrice = (value) =>
   "$" + value.toLocaleString("es-CO", { minimumFractionDigits: 0 });
 
+// ===== REFERENCIAS DOM =====
+const app = document.getElementById("app");
+const pages = document.querySelectorAll(".page");
+const navLinks = document.querySelectorAll(".nav-link");
 const productGrid = document.getElementById("productGrid");
 const emptyState = document.getElementById("emptyState");
 const categoryChips = document.getElementById("categoryChips");
@@ -116,18 +120,56 @@ const cartItemsContainer = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
 const checkoutButton = document.getElementById("checkoutButton");
 
-// Render de productos
+// ===== RUTING SPA =====
+const routes = {
+  "#/": "home",
+  "#/productos": "productos",
+  "#/categorias": "categorias",
+  "#/nosotras": "nosotras",
+  "#/contacto": "contacto"
+};
+
+function getRouteFromHash() {
+  const hash = window.location.hash || "#/";
+  return routes[hash] || "home";
+}
+
+function showPage(pageId) {
+  pages.forEach(page => {
+    page.classList.toggle("page--active", page.id === pageId);
+  });
+}
+
+function updateActiveNavLink() {
+  const currentHash = window.location.hash || "#/";
+  navLinks.forEach(link => {
+    link.classList.toggle("active", link.getAttribute("href") === currentHash);
+  });
+}
+
+function handleRouteChange() {
+  const pageId = getRouteFromHash();
+  showPage(pageId);
+  updateActiveNavLink();
+  
+  // Si vamos a la sección de productos, (re)renderizamos los productos
+  if (pageId === "productos") {
+    renderProducts();
+  }
+}
+
+// ===== RENDERIZADO DE PRODUCTOS =====
 function getVisibleProducts() {
   let result = [...products];
 
   if (filteredCategory !== "all") {
-    result = result.filter((p) => p.category === filteredCategory);
+    result = result.filter(p => p.category === filteredCategory);
   }
 
   if (searchQuery.trim() !== "") {
     const q = searchQuery.toLowerCase();
     result = result.filter(
-      (p) =>
+      p =>
         p.name.toLowerCase().includes(q) ||
         p.categoryLabel.toLowerCase().includes(q) ||
         p.description.toLowerCase().includes(q)
@@ -146,8 +188,11 @@ function getVisibleProducts() {
 }
 
 function renderProducts() {
+  if (!productGrid) return; // Solo en sección de productos
   const items = getVisibleProducts();
   productGrid.innerHTML = "";
+
+  if (!emptyState) return;
 
   if (items.length === 0) {
     emptyState.hidden = false;
@@ -155,7 +200,7 @@ function renderProducts() {
   }
   emptyState.hidden = true;
 
-  items.forEach((product) => {
+  items.forEach(product => {
     const card = document.createElement("article");
     card.className = "product-card";
     card.innerHTML = `
@@ -177,51 +222,59 @@ function renderProducts() {
   });
 }
 
-// Filtros
-categoryChips.addEventListener("click", (event) => {
-  const btn = event.target.closest(".chip");
-  if (!btn) return;
-  const category = btn.dataset.category;
-  if (!category) return;
+// ===== FILTROS =====
+if (categoryChips) {
+  categoryChips.addEventListener("click", event => {
+    const btn = event.target.closest(".chip");
+    if (!btn) return;
+    const category = btn.dataset.category;
+    if (!category) return;
 
-  filteredCategory = category;
-  document
-    .querySelectorAll(".chip")
-    .forEach((chip) => chip.classList.remove("chip--active"));
-  btn.classList.add("chip--active");
+    filteredCategory = category;
+    document
+      .querySelectorAll(".chip")
+      .forEach(chip => chip.classList.remove("chip--active"));
+    btn.classList.add("chip--active");
 
-  renderProducts();
-});
+    renderProducts();
+  });
+}
 
-searchInput.addEventListener("input", (event) => {
-  searchQuery = event.target.value;
-  renderProducts();
-});
+if (searchInput) {
+  searchInput.addEventListener("input", event => {
+    searchQuery = event.target.value;
+    renderProducts();
+  });
+}
 
-sortSelect.addEventListener("change", (event) => {
-  sortMode = event.target.value;
-  renderProducts();
-});
+if (sortSelect) {
+  sortSelect.addEventListener("change", event => {
+    sortMode = event.target.value;
+    renderProducts();
+  });
+}
 
-// Carrito
+// ===== CARRITO =====
 function openCart() {
+  if (!cartPanel || !backdrop) return;
   cartPanel.classList.add("cart-panel--open");
   backdrop.classList.add("backdrop--visible");
   cartPanel.setAttribute("aria-hidden", "false");
 }
 
 function closeCart() {
+  if (!cartPanel || !backdrop) return;
   cartPanel.classList.remove("cart-panel--open");
   backdrop.classList.remove("backdrop--visible");
   cartPanel.setAttribute("aria-hidden", "true");
 }
 
-cartButton.addEventListener("click", openCart);
-closeCartButton.addEventListener("click", closeCart);
-backdrop.addEventListener("click", closeCart);
+if (cartButton) cartButton.addEventListener("click", openCart);
+if (closeCartButton) closeCartButton.addEventListener("click", closeCart);
+if (backdrop) backdrop.addEventListener("click", closeCart);
 
 function addToCart(productId) {
-  const existing = cart.find((item) => item.id === productId);
+  const existing = cart.find(item => item.id === productId);
   if (existing) {
     existing.qty += 1;
   } else {
@@ -239,8 +292,8 @@ function updateCartUI() {
     cartItemsContainer.innerHTML =
       '<p style="font-size:0.85rem;color:#7a6e78;">Tu carrito está vacío. Agrega algunos productos cute ✨</p>';
   } else {
-    cart.forEach((item) => {
-      const product = products.find((p) => p.id === item.id);
+    cart.forEach(item => {
+      const product = products.find(p => p.id === item.id);
       if (!product) return;
       totalQty += item.qty;
       totalPrice += product.price * item.qty;
@@ -259,80 +312,92 @@ function updateCartUI() {
             <button data-remove="${product.id}" style="margin-left:8px;font-size:0.7rem;">Quitar</button>
           </div>
         </div>
-        <div class="cart-item__price">${formatPrice(product.price * item.qty)}</div>
+        <div class="cart-item__price">${formatPrice(price * item.qty)}</div>
       `;
       cartItemsContainer.appendChild(row);
     });
   }
 
-  cartCount.textContent = totalQty;
-  cartTotal.textContent = formatPrice(totalPrice);
+  if (cartCount) cartCount.textContent = totalQty;
+  if (cartTotal) cartTotal.textContent = formatPrice(totalPrice);
 }
 
-cartItemsContainer.addEventListener("click", (event) => {
+cartItemsContainer.addEventListener("click", event => {
   const decId = event.target.dataset.decrease;
   const incId = event.target.dataset.increase;
   const remId = event.target.dataset.remove;
 
   if (decId) {
     const id = Number(decId);
-    const item = cart.find((i) => i.id === id);
+    const item = cart.find(i => i.id === id);
     if (!item) return;
     item.qty -= 1;
     if (item.qty <= 0) {
-      cart = cart.filter((i) => i.id !== id);
+      cart = cart.filter(i => i.id !== id);
     }
     updateCartUI();
   } else if (incId) {
     const id = Number(incId);
-    const item = cart.find((i) => i.id === id);
+    const item = cart.find(i => i.id === id);
     if (!item) return;
     item.qty += 1;
     updateCartUI();
   } else if (remId) {
     const id = Number(remId);
-    cart = cart.filter((i) => i.id !== id);
+    cart = cart.filter(i => i.id !== id);
     updateCartUI();
   }
 });
 
-// Delegación de clic para botones "Agregar"
-productGrid.addEventListener("click", (event) => {
-  const btn = event.target.closest("button[data-add-to-cart]");
-  if (!btn) return;
-  const id = Number(btn.dataset.addToCart);
-  addToCart(id);
-});
+// Delegación para botones "Agregar" (solo en sección de productos)
+if (productGrid) {
+  productGrid.addEventListener("click", event => {
+    const btn = event.target.closest("button[data-add-to-cart]");
+    if (!btn) return;
+    const id = Number(btn.dataset.addToCart);
+    addToCart(id);
+  });
+}
 
 // Checkout demo
-checkoutButton.addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("Tu carrito está vacío.");
-    return;
-  }
-  alert(
-    "Esta es una versión demo. Aquí podrías redirigir a un flujo real de pago (Nequi, Daviplata, pasarela, etc.)."
-  );
-});
+if (checkoutButton) {
+  checkoutButton.addEventListener("click", () => {
+    if (cart.length === 0) {
+      alert("Tu carrito está vacío.");
+      return;
+    }
+    alert(
+      "Esta es una versión demo. Aquí podrías redirigir a un flujo real de pago (Nequi, Daviplata, pasarela, etc.)."
+    );
+  });
+}
 
-// Navbar móvil
+// ===== NAVBAR MÓVIL =====
 const navbarToggle = document.querySelector(".navbar__toggle");
 const navbarLinks = document.querySelector(".navbar__links");
 
-navbarToggle.addEventListener("click", () => {
-  navbarLinks.classList.toggle("navbar__links--open");
-});
+if (navbarToggle && navbarLinks) {
+  navbarToggle.addEventListener("click", () => {
+    navbarLinks.classList.toggle("navbar__links--open");
+  });
 
-// Cerrar menú al hacer clic en un enlace (mobile)
-navbarLinks.addEventListener("click", (event) => {
-  if (event.target.tagName.toLowerCase() === "a") {
-    navbarLinks.classList.remove("navbar__links--open");
-  }
-});
+  navbarLinks.addEventListener("click", event => {
+    if (event.target.tagName.toLowerCase() === "a") {
+      navbarLinks.classList.remove("navbar__links--open");
+    }
+  });
+}
 
-// Año en footer
-document.getElementById("year").textContent = new Date().getFullYear();
+// ===== AÑO EN FOOTER =====
+const yearSpan = document.getElementById("year");
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}
 
-// Inicializar
+// ===== INICIALIZACIÓN =====
+window.addEventListener("hashchange", handleRouteChange);
+window.addEventListener("load", handleRouteChange);
+
+// Render inicial de productos (por si empieza en /productos)
 renderProducts();
 updateCartUI();
