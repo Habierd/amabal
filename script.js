@@ -1,95 +1,13 @@
-// ===== DATOS DE PRODUCTOS (igual que antes) =====
 const products = [
-  {
-    id: 1,
-    name: "Kit Uñas Postizas Pastel",
-    category: "unas",
-    categoryLabel: "Uñas postizas",
-    price: 32000,
-    emoji: "💅",
-    description: "Set de 24 uñas tono pastel, limas y adhesivo incluido.",
-    tag: "Nuevo"
-  },
-  {
-    id: 2,
-    name: "Adhesivo en Gel para Uñas",
-    category: "unas",
-    categoryLabel: "Adhesivos para uñas",
-    price: 18000,
-    emoji: "✨",
-    description: "Adhesivo en gel de larga duración, cómodo y resistente.",
-    tag: "Top venta"
-  },
-  {
-    id: 3,
-    name: "Set Stickers Cute para Uñas",
-    category: "unas",
-    categoryLabel: "Decoración de uñas",
-    price: 15000,
-    emoji: "🌸",
-    description: "Stickers kawaii para personalizar tus diseños.",
-    tag: "Cute"
-  },
-  {
-    id: 4,
-    name: "Serum Capilar Reparador",
-    category: "capilar",
-    categoryLabel: "Productos capilares",
-    price: 45000,
-    emoji: "💇‍♀️",
-    description: "Serum ligero para puntas abiertas y frizz.",
-    tag: "Capilar"
-  },
-  {
-    id: 5,
-    name: "Mascarilla Hidratante para Cabello",
-    category: "capilar",
-    categoryLabel: "Productos capilares",
-    price: 38000,
-    emoji: "🧴",
-    description: "Mascarilla semanal para brillo y suavidad.",
-    tag: "Hidratación"
-  },
-  {
-    id: 6,
-    name: "Gel Limpiador Facial Suave",
-    category: "piel",
-    categoryLabel: "Cuidado de la piel",
-    price: 29000,
-    emoji: "🫧",
-    description: "Ideal para piel mixta, limpia sin resecar.",
-    tag: "Skincare"
-  },
-  {
-    id: 7,
-    name: "Crema Hidratante Ligera",
-    category: "piel",
-    categoryLabel: "Cuidado de la piel",
-    price: 31000,
-    emoji: "🌙",
-    description: "Textura gel-crema, rápida absorción.",
-    tag: "Día y noche"
-  },
-  {
-    id: 8,
-    name: "Scrunchies y Vinchas Soft",
-    category: "accesorios",
-    categoryLabel: "Accesorios",
-    price: 16000,
-    emoji: "🎀",
-    description: "Pack de scrunchies y vincha para skincare.",
-    tag: "Accesorios"
-  },
-  {
-    id: 9,
-    name: "Kit Manicure en Casa",
-    category: "unas",
-    categoryLabel: "Uñas",
-    price: 52000,
-    emoji: "🧰",
-    description: "Cortaúñas, palitos de naranjo, buffers y más.",
-    tag: "Kit"
-  }
+  { id: 1, name: "Kit Uñas Postizas Pastel", category: "unas", categoryLabel: "Uñas postizas", price: 32000, emoji: "💅", description: "Set de 24 uñas tono pastel, limas y adhesivo incluido.", tag: "Nuevo" },
+  { id: 2, name: "Adhesivo en Gel para Uñas", category: "unas", categoryLabel: "Adhesivos para uñas", price: 18000, emoji: "✨", description: "Adhesivo en gel de larga duración, cómodo y resistente.", tag: "Top venta" },
+  { id: 3, name: "Set Stickers Cute para Uñas", category: "unas", categoryLabel: "Decoración de uñas", price: 15000, emoji: "🌸", description: "Stickers kawaii para personalizar tus diseños.", tag: "Cute" },
+  { id: 4, name: "Serum Capilar Reparador", category: "capilar", categoryLabel: "Productos capilares", price: 45000, emoji: "💇‍♀️", description: "Serum ligero para puntas abiertas y frizz.", tag: "Capilar" },
+  { id: 5, name: "Mascarilla Hidratante para Cabello", category: "capilar", categoryLabel: "Productos capilares", price: 38000, emoji: "🧴", description: "Mascarilla semanal para brillo y suavidad.", tag: "Hidratación" },
+  { id: 6, name: "Gel Limpiador Facial Suave", category: "piel", categoryLabel: "Cuidado de la piel", price: 29000, emoji: "🫧", description: "Ideal para piel mixta, limpia sin resecar.", tag: "Skincare" },
+  { id: 7, name: "Crema Hidratante Ligera", category: "piel", categoryLabel: "Cuidado de la piel", price: 31000, emoji: "🌙", description: "Textura gel-crema, rápida absorción.", tag: "Día y noche" },
+  { id: 8, name: "Scrunchies y Vinchas Soft", category: "accesorios", categoryLabel: "Accesorios", price: 16000, emoji: "🎀", description: "Pack de scrunchies y vincha para skincare.", tag: "Accesorios" },
+  { id: 9, name: "Kit Manicure en Casa", category: "unas", categoryLabel: "Uñas", price: 52000, emoji: "🧰", description: "Cortaúñas, palitos de naranjo, buffers y más.", tag: "Kit" }
 ];
 
 let filteredCategory = "all";
@@ -97,12 +15,9 @@ let searchQuery = "";
 let sortMode = "default";
 let cart = [];
 
-// ===== HELPERS =====
 const formatPrice = (value) =>
   "$" + value.toLocaleString("es-CO", { minimumFractionDigits: 0 });
 
-// ===== REFERENCIAS DOM =====
-const app = document.getElementById("app");
 const pages = document.querySelectorAll(".page");
 const navLinks = document.querySelectorAll(".nav-link");
 const productGrid = document.getElementById("productGrid");
@@ -110,7 +25,6 @@ const emptyState = document.getElementById("emptyState");
 const categoryChips = document.getElementById("categoryChips");
 const searchInput = document.getElementById("searchInput");
 const sortSelect = document.getElementById("sortSelect");
-
 const cartButton = document.getElementById("cartButton");
 const cartPanel = document.getElementById("cartPanel");
 const closeCartButton = document.getElementById("closeCartButton");
@@ -120,7 +34,7 @@ const cartItemsContainer = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
 const checkoutButton = document.getElementById("checkoutButton");
 
-// ===== RUTING SPA =====
+// ===== ROUTING SPA =====
 const routes = {
   "#/": "home",
   "#/productos": "productos",
@@ -151,14 +65,11 @@ function handleRouteChange() {
   const pageId = getRouteFromHash();
   showPage(pageId);
   updateActiveNavLink();
-  
-  // Si vamos a la sección de productos, (re)renderizamos los productos
-  if (pageId === "productos") {
-    renderProducts();
-  }
+  window.scrollTo(0, 0);
+  if (pageId === "productos") renderProducts();
 }
 
-// ===== RENDERIZADO DE PRODUCTOS =====
+// ===== PRODUCTOS =====
 function getVisibleProducts() {
   let result = [...products];
 
@@ -168,31 +79,24 @@ function getVisibleProducts() {
 
   if (searchQuery.trim() !== "") {
     const q = searchQuery.toLowerCase();
-    result = result.filter(
-      p =>
-        p.name.toLowerCase().includes(q) ||
-        p.categoryLabel.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q)
+    result = result.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.categoryLabel.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q)
     );
   }
 
-  if (sortMode === "price-asc") {
-    result.sort((a, b) => a.price - b.price);
-  } else if (sortMode === "price-desc") {
-    result.sort((a, b) => b.price - a.price);
-  } else if (sortMode === "name-asc") {
-    result.sort((a, b) => a.name.localeCompare(b.name, "es"));
-  }
+  if (sortMode === "price-asc") result.sort((a, b) => a.price - b.price);
+  else if (sortMode === "price-desc") result.sort((a, b) => b.price - a.price);
+  else if (sortMode === "name-asc") result.sort((a, b) => a.name.localeCompare(b.name, "es"));
 
   return result;
 }
 
 function renderProducts() {
-  if (!productGrid) return; // Solo en sección de productos
+  if (!productGrid || !emptyState) return;
   const items = getVisibleProducts();
   productGrid.innerHTML = "";
-
-  if (!emptyState) return;
 
   if (items.length === 0) {
     emptyState.hidden = false;
@@ -210,12 +114,8 @@ function renderProducts() {
       <p class="product-card__category">${product.categoryLabel}</p>
       <p class="product-card__desc">${product.description}</p>
       <div class="product-card__bottom">
-        <p class="product-card__price">
-          ${formatPrice(product.price)} <span>COP</span>
-        </p>
-        <button class="btn btn-ghost" data-add-to-cart="${product.id}">
-          Agregar
-        </button>
+        <p class="product-card__price">${formatPrice(product.price)} <span>COP</span></p>
+        <button class="btn btn-ghost" data-add-to-cart="${product.id}">Agregar</button>
       </div>
     `;
     productGrid.appendChild(card);
@@ -226,16 +126,10 @@ function renderProducts() {
 if (categoryChips) {
   categoryChips.addEventListener("click", event => {
     const btn = event.target.closest(".chip");
-    if (!btn) return;
-    const category = btn.dataset.category;
-    if (!category) return;
-
-    filteredCategory = category;
-    document
-      .querySelectorAll(".chip")
-      .forEach(chip => chip.classList.remove("chip--active"));
+    if (!btn || !btn.dataset.category) return;
+    filteredCategory = btn.dataset.category;
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("chip--active"));
     btn.classList.add("chip--active");
-
     renderProducts();
   });
 }
@@ -243,7 +137,7 @@ if (categoryChips) {
 if (searchInput) {
   searchInput.addEventListener("input", event => {
     searchQuery = event.target.value;
-    renderProducts();
+    if (getRouteFromHash() === "productos") renderProducts();
   });
 }
 
@@ -284,6 +178,8 @@ function addToCart(productId) {
 }
 
 function updateCartUI() {
+  if (!cartItemsContainer) return; // ✅ guard añadido
+
   let totalQty = 0;
   let totalPrice = 0;
   cartItemsContainer.innerHTML = "";
@@ -296,7 +192,7 @@ function updateCartUI() {
       const product = products.find(p => p.id === item.id);
       if (!product) return;
       totalQty += item.qty;
-      totalPrice += product.price * item.qty;
+      totalPrice += product.price * item.qty; // ✅ corregido: era solo "price"
 
       const row = document.createElement("div");
       row.className = "cart-item";
@@ -312,7 +208,7 @@ function updateCartUI() {
             <button data-remove="${product.id}" style="margin-left:8px;font-size:0.7rem;">Quitar</button>
           </div>
         </div>
-        <div class="cart-item__price">${formatPrice(price * item.qty)}</div>
+        <div class="cart-item__price">${formatPrice(product.price * item.qty)}</div>
       `;
       cartItemsContainer.appendChild(row);
     });
@@ -322,53 +218,47 @@ function updateCartUI() {
   if (cartTotal) cartTotal.textContent = formatPrice(totalPrice);
 }
 
-cartItemsContainer.addEventListener("click", event => {
-  const decId = event.target.dataset.decrease;
-  const incId = event.target.dataset.increase;
-  const remId = event.target.dataset.remove;
+if (cartItemsContainer) {
+  cartItemsContainer.addEventListener("click", event => {
+    const decId = event.target.dataset.decrease;
+    const incId = event.target.dataset.increase;
+    const remId = event.target.dataset.remove;
 
-  if (decId) {
-    const id = Number(decId);
-    const item = cart.find(i => i.id === id);
-    if (!item) return;
-    item.qty -= 1;
-    if (item.qty <= 0) {
-      cart = cart.filter(i => i.id !== id);
+    if (decId) {
+      const id = Number(decId);
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty -= 1;
+      if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    } else if (incId) {
+      const id = Number(incId);
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty += 1;
+      updateCartUI();
+    } else if (remId) {
+      cart = cart.filter(i => i.id !== Number(remId));
+      updateCartUI();
     }
-    updateCartUI();
-  } else if (incId) {
-    const id = Number(incId);
-    const item = cart.find(i => i.id === id);
-    if (!item) return;
-    item.qty += 1;
-    updateCartUI();
-  } else if (remId) {
-    const id = Number(remId);
-    cart = cart.filter(i => i.id !== id);
-    updateCartUI();
-  }
-});
+  });
+}
 
-// Delegación para botones "Agregar" (solo en sección de productos)
 if (productGrid) {
   productGrid.addEventListener("click", event => {
     const btn = event.target.closest("button[data-add-to-cart]");
     if (!btn) return;
-    const id = Number(btn.dataset.addToCart);
-    addToCart(id);
+    addToCart(Number(btn.dataset.addToCart));
   });
 }
 
-// Checkout demo
 if (checkoutButton) {
   checkoutButton.addEventListener("click", () => {
     if (cart.length === 0) {
       alert("Tu carrito está vacío.");
       return;
     }
-    alert(
-      "Esta es una versión demo. Aquí podrías redirigir a un flujo real de pago (Nequi, Daviplata, pasarela, etc.)."
-    );
+    alert("Esta es una versión demo. Aquí podrías redirigir a un flujo real de pago (Nequi, Daviplata, pasarela, etc.).");
   });
 }
 
@@ -380,7 +270,6 @@ if (navbarToggle && navbarLinks) {
   navbarToggle.addEventListener("click", () => {
     navbarLinks.classList.toggle("navbar__links--open");
   });
-
   navbarLinks.addEventListener("click", event => {
     if (event.target.tagName.toLowerCase() === "a") {
       navbarLinks.classList.remove("navbar__links--open");
@@ -388,16 +277,12 @@ if (navbarToggle && navbarLinks) {
   });
 }
 
-// ===== AÑO EN FOOTER =====
+// ===== FOOTER AÑO =====
 const yearSpan = document.getElementById("year");
-if (yearSpan) {
-  yearSpan.textContent = new Date().getFullYear();
-}
+if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
 // ===== INICIALIZACIÓN =====
 window.addEventListener("hashchange", handleRouteChange);
 window.addEventListener("load", handleRouteChange);
-
-// Render inicial de productos (por si empieza en /productos)
 renderProducts();
 updateCartUI();
