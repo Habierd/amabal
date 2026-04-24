@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amabal - Tienda de Belleza</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__badge">Nuevo</div>
+    <p class="topbar__text">Envíos gratis a partir de $100.000 COP en Colombia</p>
+  </header>
+
+  <nav class="navbar">
+    <div class="navbar__logo">
+      <span class="logo__icon">✿</span>
+      <span class="logo__text">amabal</span>
+    </div>
+
+    <button class="navbar__toggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="navbar__links">
+      <a href="#home">Inicio</a>
+      <a href="#products">Productos</a>
+      <a href="#categories">Categorías</a>
+      <a href="#about">Nosotras</a>
+      <a href="#contact">Contacto</a>
+    </div>
+
+    <div class="navbar__actions">
+      <div class="navbar__search">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar productos..."
+          aria-label="Buscar productos"
+        />
+      </div>
+      <button class="btn-icon" id="cartButton" aria-label="Carrito">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero__content">
+        <p class="hero__pill">Tienda virtual • Belleza</p>
+        <h1>Amabal: belleza <span class="hero__highlight">cute</span> todos los días</h1>
+        <p class="hero__subtitle">
+          Uñas postizas, adhesivos, cuidado de manos, productos capilares, skincare y más.
+          Diseñado para chicas que aman los detalles.
+        </p>
+        <div class="hero__buttons">
+          <a href="#products" class="btn btn-primary">Ver productos</a>
+          <a href="#categories" class="btn btn-ghost">Explorar categorías</a>
+        </div>
+        <div class="hero__info">
+          <span>Pago seguro</span>
+          <span>Productos seleccionados</span>
+          <span>Envíos a todo Colombia</span>
+        </div>
+      </div>
+
+      <div class="hero__card">
+        <p class="hero__card-title">Colección Uñas 2026</p>
+        <p class="hero__card-text">
+          Diseños delicados, tonos pastel y acabados glossy.
+        </p>
+        <ul class="hero__card-list">
+          <li>Uñas postizas listas para usar</li>
+          <li>Adhesivos resistentes y cómodos</li>
+          <li>Kits completos para principiantes</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <header class="section__header">
+        <h2>Categorías destacadas</h2>
+        <p>Explora todo lo que tenemos para completar tu rutina de belleza.</p>
+      </header>
+
+      <div class="chip-list" id="categoryChips">
+        <button class="chip chip--active" data-category="all">Todo</button>
+        <button class="chip" data-category="unas">Uñas</button>
+        <button class="chip" data-category="capilar">Productos capilares</button>
+        <button class="chip" data-category="piel">Cuidado de la piel</button>
+        <button class="chip" data-category="accesorios">Accesorios</button>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <header class="section__header section__header--row">
+        <div>
+          <h2>Productos Amabal</h2>
+          <p>Filtra por categoría o usa el buscador para encontrar tu favorito.</p>
+        </div>
+        <select id="sortSelect" class="select">
+          <option value="default">Ordenar por</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="name-asc">Nombre: A-Z</option>
+        </select>
+      </header>
+
+      <div class="products-grid" id="productGrid">
+        <!-- Se llena dinámicamente con script.js -->
+      </div>
+
+      <p class="empty-state" id="emptyState" hidden>
+        No encontramos productos con esos filtros. Prueba cambiando la búsqueda o categoría.
+      </p>
+    </section>
+
+    <section class="section section--soft" id="about">
+      <div class="about">
+        <div class="about__text">
+          <h2>Sobre Amabal</h2>
+          <p>
+            Amabal nace como una tienda virtual enfocada en productos de belleza seleccionados,
+            con especial amor por las uñas y los detalles que hacen tu día más bonito.
+          </p>
+          <p>
+            Buscamos que tu experiencia de compra sea sencilla, visualmente agradable
+            y segura, para que solo te preocupes por elegir lo que más te gusta.
+          </p>
+          <ul class="about__list">
+            <li>Curaduría de productos cute y funcionales</li>
+            <li>Ideal para regalos y auto-cuidado</li>
+            <li>Enfoque en calidad y experiencia de uso</li>
+          </ul>
+        </div>
+        <div class="about__card">
+          <p class="about__badge">Hecho con cariño ✨</p>
+          <p class="about__small">
+            Esta es una versión demo lista para desplegar en GitHub Pages.
+          </p>
+          <p class="about__small">
+            ¿Ideas nuevas? Podemos agregar reseñas, login, carrito persistente y más.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <header class="section__header">
+        <h2>Contacto y redes</h2>
+        <p>Escríbenos para dudas, pedidos especiales o alianzas.</p>
+      </header>
+
+      <div class="contact">
+        <form class="contact__form" onsubmit="event.preventDefault(); alert('Este formulario es de demostración en esta versión estática.');">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input id="name" type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input id="email" type="email" placeholder="tunombre@correo.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Mensaje</label>
+            <textarea id="message" rows="4" placeholder="Cuéntanos qué estás buscando" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Enviar mensaje</button>
+        </form>
+
+        <div class="contact__info">
+          <h3>Atención al cliente</h3>
+          <p>Horario: Lun - Sáb, 9:00 am a 6:00 pm (hora Colombia).</p>
+          <p>WhatsApp: +57 XXX XXX XXXX (ejemplo)</p>
+          <p>Correo: hola@amabal.store (ejemplo)</p>
+          <div class="contact__social">
+            <span>Síguenos:</span>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+            <a href="#">Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <div class="cart-panel__header">
+      <h2>Tu carrito</h2>
+      <button class="btn-icon" id="closeCartButton" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="cart-panel__body" id="cartItems">
+      <!-- Items del carrito -->
+    </div>
+    <div class="cart-panel__footer">
+      <div class="cart-panel__total">
+        <span>Total:</span>
+        <span id="cartTotal">$0</span>
+      </div>
+      <button class="btn btn-primary btn-full" id="checkoutButton">
+        Finalizar compra (demo)
+      </button>
+      <p class="cart-panel__note">
+        Esta es una versión demo. Puedes personalizar el flujo de pago (Nequi, Daviplata, etc.).
+      </p>
+    </div>
+  </aside>
+
+  <div class="backdrop" id="backdrop"></div>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Amabal. Todos los derechos reservados.</p>
+    <p class="footer__small">Hecho con ♥ para proyectos en GitHub Pages.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
