@@ -26,6 +26,8 @@ const categoryChips      = document.getElementById("categoryChips");
 const searchInput        = document.getElementById("searchInput");
 const sortSelect         = document.getElementById("sortSelect");
 const cartButton         = document.getElementById("cartButton");
+const cartFab            = document.getElementById("cartFab");
+const cartFabCount       = document.getElementById("cartFabCount");
 const cartPanel          = document.getElementById("cartPanel");
 const closeCartButton    = document.getElementById("closeCartButton");
 const backdrop           = document.getElementById("backdrop");
@@ -152,6 +154,7 @@ function closeCart() {
 }
 
 if (cartButton)      cartButton.addEventListener("click", openCart);
+if (cartFab)         cartFab.addEventListener("click", openCart);
 if (closeCartButton) closeCartButton.addEventListener("click", closeCart);
 if (backdrop)        backdrop.addEventListener("click", closeCart);
 
@@ -165,6 +168,7 @@ function updateCartUI() {
   if (!cartItemsContainer) return;
   let qty = 0, total = 0;
   cartItemsContainer.innerHTML = "";
+
   if (!cart.length) {
     cartItemsContainer.innerHTML = '<p style="font-size:0.85rem;color:#7a6e78;padding:8px 0;">Tu carrito está vacío ✨</p>';
   } else {
@@ -191,8 +195,11 @@ function updateCartUI() {
       cartItemsContainer.appendChild(row);
     });
   }
-  if (cartCount) cartCount.textContent = qty;
-  if (cartTotal) cartTotal.textContent = formatPrice(total);
+
+  // Actualizar contadores (navbar + FAB)
+  if (cartCount)    cartCount.textContent    = qty;
+  if (cartFabCount) cartFabCount.textContent = qty;
+  if (cartTotal)    cartTotal.textContent    = formatPrice(total);
 }
 
 if (cartItemsContainer) {
@@ -235,7 +242,6 @@ if (navbarToggle && navbarLinksEl) {
   navbarToggle.addEventListener("click", () => {
     navbarLinksEl.classList.toggle("navbar__links--open");
   });
-  // Cerrar al tocar un link
   navbarLinksEl.addEventListener("click", e => {
     if (e.target.tagName === "A") {
       navbarLinksEl.classList.remove("navbar__links--open");

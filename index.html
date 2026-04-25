@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amabal - Tienda de Belleza</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✿</text></svg>" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,7 +41,7 @@
       <div class="navbar__search">
         <input type="text" id="searchInput" placeholder="Buscar productos..." aria-label="Buscar productos" />
       </div>
-      <button class="btn-icon" id="cartButton" aria-label="Carrito">
+      <button class="btn-icon cart-btn-navbar" id="cartButton" aria-label="Carrito">
         🛒 <span class="cart-count" id="cartCount">0</span>
       </button>
     </div>
@@ -221,6 +222,12 @@
       <p class="cart-panel__note">Versión demo — personaliza el flujo de pago según tu necesidad.</p>
     </div>
   </aside>
+
+  <!-- BOTÓN FLOTANTE CARRITO (solo móvil) -->
+  <button class="cart-fab" id="cartFab" aria-label="Abrir carrito">
+    🛒
+    <span class="cart-fab__count" id="cartFabCount">0</span>
+  </button>
 
   <div class="backdrop" id="backdrop"></div>
 

@@ -321,8 +321,8 @@ body {
   padding: 7px 14px;
   cursor: pointer;
   color: var(--text-muted);
-  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   min-height: 36px;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 .chip:hover { transform: translateY(-0.5px); box-shadow: 0 8px 18px rgba(0,0,0,0.07); }
 .chip--active {
@@ -564,6 +564,45 @@ body {
 }
 .cart-panel__note { margin: 6px 0 0; font-size: 0.75rem; color: var(--text-muted); }
 
+/* ── BOTÓN FLOTANTE CARRITO ─────────────── */
+.cart-fab {
+  display: none; /* oculto en desktop */
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 50;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--color-2), var(--color-1));
+  box-shadow: 0 8px 24px rgba(255,181,179,0.6);
+  font-size: 1.5rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.cart-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 14px 32px rgba(255,181,179,0.75);
+}
+.cart-fab__count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #fff;
+  color: #4d3434;
+  border-radius: 999px;
+  padding: 1px 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-family: "Nunito", sans-serif;
+  min-width: 18px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
 /* ── BACKDROP ───────────────────────────── */
 .backdrop {
   position: fixed;
@@ -591,7 +630,7 @@ body {
    RESPONSIVO
 ══════════════════════════════════════════ */
 
-/* Tablet / pantallas medianas */
+/* Tablet */
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: minmax(0,1fr);
@@ -602,13 +641,19 @@ body {
   .contact { grid-template-columns: minmax(0,1fr); }
 }
 
-/* Móvil — navbar con hamburguesa */
+/* Móvil */
 @media (max-width: 768px) {
 
-  /* Mostrar botón hamburguesa */
+  /* Ocultar carrito en navbar en móvil (lo reemplaza el FAB) */
+  .cart-btn-navbar { display: none; }
+
+  /* Mostrar FAB */
+  .cart-fab { display: inline-flex; }
+
+  /* Mostrar hamburguesa */
   .navbar__toggle { display: flex; }
 
-  /* Ocultar menú de links en línea */
+  /* Menú desplegable */
   .navbar__links {
     position: fixed;
     top: 57px;
@@ -626,32 +671,30 @@ body {
     transition: transform var(--transition-med);
     z-index: 19;
   }
-
-  /* Clase que activa el menú abierto */
   .navbar__links--open { transform: translateY(0); }
 
   .navbar__links a {
     font-size: 1rem;
     padding: 4px 0;
+    width: 100%;
   }
 
-  /* Buscador más pequeño en móvil */
+  /* Buscador compacto */
   .navbar__search input {
     min-width: 0;
-    width: 38vw;
-    max-width: 200px;
+    width: 50vw;
+    max-width: 220px;
     font-size: 0.82rem;
     padding: 7px 10px;
   }
 
   .navbar__actions { gap: 0.5rem; }
+  main { padding-top: 4px; }
 
-  /* Hero en móvil */
-  .hero {
-    padding-inline: 4vw;
-    gap: 1.5rem;
-  }
+  /* Espacio para el FAB */
+  body { padding-bottom: 80px; }
 
+  .hero { padding-inline: 4vw; gap: 1.5rem; }
   .hero h1 { font-size: 1.8rem; }
 }
 
@@ -661,24 +704,12 @@ body {
   .topbar__text { font-size: 0.75rem; }
 
   .navbar { padding: 8px 4vw; gap: 0.5rem; }
-
-  /* En pantallas muy pequeñas, ocultar el texto del logo */
   .logo__text { display: none; }
 
-  /* Buscador compacto */
   .navbar__search input {
-    width: 34vw;
+    width: 44vw;
     font-size: 0.8rem;
     padding: 6px 8px;
-  }
-
-  /* Carrito con tamaño mínimo tocable */
-  .btn-icon {
-    padding: 8px 10px;
-    font-size: 1.1rem;
-    min-width: 44px;
-    min-height: 44px;
-    justify-content: center;
   }
 
   .hero { padding-inline: 4vw; }
@@ -691,8 +722,6 @@ body {
   .categories-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
 
   .btn { padding: 10px 16px; font-size: 0.88rem; }
-
-  /* Carrito lateral ocupa casi toda la pantalla */
   .cart-panel { width: 96vw; }
   .cart-panel__footer { padding-bottom: 24px; }
 }
