@@ -23,16 +23,19 @@
         <span class="logo__text">amabal</span>
       </a>
     </div>
-    <button class="navbar__toggle" aria-label="Abrir menú">
+
+    <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </button>
-    <div class="navbar__links">
+
+    <div class="navbar__links" id="navLinks">
       <a href="#/" class="nav-link">Inicio</a>
       <a href="#/productos" class="nav-link">Productos</a>
       <a href="#/categorias" class="nav-link">Categorías</a>
       <a href="#/nosotras" class="nav-link">Nosotras</a>
       <a href="#/contacto" class="nav-link">Contacto</a>
     </div>
+
     <div class="navbar__actions">
       <div class="navbar__search">
         <input type="text" id="searchInput" placeholder="Buscar productos..." aria-label="Buscar productos" />
@@ -202,7 +205,7 @@
 
   </main>
 
-  <!-- CARRITO -->
+  <!-- CARRITO LATERAL -->
   <aside class="cart-panel" id="cartPanel" aria-hidden="true">
     <div class="cart-panel__header">
       <h2>Tu carrito</h2>
